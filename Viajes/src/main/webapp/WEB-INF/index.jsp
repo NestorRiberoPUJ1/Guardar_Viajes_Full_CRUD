@@ -12,7 +12,7 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 
-<title>Insert title here</title>
+<title>Dashboard</title>
 </head>
 <body>
 
@@ -30,18 +30,28 @@
 			<tbody>
 				<c:forEach var="gasto" items="${lista_gastos}">
 					<tr>
-						<td><c:out value="${gasto.getExpense_name()}"/></td>
-						<td><c:out value="${gasto.getVendor()}"/></td>
-						<td><c:out value="${gasto.getAmount()}"/></td>
+						<td><a href="/expenses/${gasto.getId()}"><c:out value="${gasto.getExpense_name()}" /></a></td>
+						<td><c:out value="${gasto.getVendor()}" /></td>
+						<td><c:out value="${gasto.getAmount()}" /></td>
 						<td>
-							<a href="/expenses/edit/${gasto.getId()}" class="btn btn-warning">Editar</a>
+							<div class="container col">
+								<a href="/expenses/edit/${gasto.getId()}"
+									class="btn btn-warning">Editar</a>
+
+								<form:form action="/expenses/delete/${gasto.getId()}"
+									method="POST">
+									<input type="hidden" name="_method" value="delete">
+									<input type="submit" value="Eliminar" class="btn btn-danger" />
+								</form:form>
+
+							</div>
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 
-	<a href="expenses/new">Agregar Gasto</a>
+		<a href="expenses/new">Agregar Gasto</a>
 
 	</div>
 
